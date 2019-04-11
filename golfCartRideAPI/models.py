@@ -7,6 +7,9 @@ class Department(models.Model):
     class Meta:
         db_table = "Department"
 
+    def __str__(self):
+        return self.name
+
 
 class Person(models.Model):
     PERSON_TYPES = (
@@ -21,12 +24,19 @@ class Person(models.Model):
     phone = models.CharField(max_length=100, null=True, blank=True)
     sub_type = models.CharField(max_length=20, db_column="subtype", null=False, blank=False, choices=PERSON_TYPES)
 
+    @property
+    def full_name(self):
+        return self.first_name + " " + self.last_name
+
     class Meta:
         db_table = "Person"
 
+    def __str__(self):
+        return self.full_name
+
 
 class Staff(models.Model):
-    id = models.ForeignKey(Person, db_column='id', on_delete=models.CASCADE, primary_key=True, unique=True)
+    id = models.OneToOneField(Person, db_column='id', on_delete=models.CASCADE, primary_key=True, verbose_name="Person")
     position = models.CharField(max_length=55, null=True, blank=True)
     is_admin = models.BooleanField(default=False, db_column="isAdmin")
     department = models.ForeignKey(Department, db_column='department_id', on_delete=models.SET_NULL, null=True)
@@ -34,9 +44,13 @@ class Staff(models.Model):
     class Meta:
         db_table = "Staff"
 
+    @property
+    def person(self):
+        return self.id
+
 
 class Professor(models.Model):
-    id = models.ForeignKey(Person, db_column='id', on_delete=models.CASCADE, primary_key=True, unique=True)
+    id = models.OneToOneField(Person, db_column='id', on_delete=models.CASCADE, primary_key=True, verbose_name="Person")
     title = models.CharField(max_length=55, default=None)
     is_full_time = models.BooleanField(default=False, db_column="isFullTime")
     department = models.ForeignKey(Department, db_column="department_id", on_delete=models.SET_NULL, null=True)
@@ -44,14 +58,22 @@ class Professor(models.Model):
     class Meta:
         db_table = "Professor"
 
+    @property
+    def person(self):
+        return self.id
+
 
 class Student(models.Model):
-    id = models.ForeignKey(Person, db_column='id', on_delete=models.CASCADE, primary_key=True, unique=True)
+    id = models.OneToOneField(Person, db_column='id', on_delete=models.CASCADE, primary_key=True, verbose_name="Person")
     birth_date = models.DateField(default=None, db_column="birthdate")
     grad_year = models.CharField(max_length=20, null=False, blank=False, db_column="gradYear")
 
     class Meta:
         db_table = "Student"
+
+    @property
+    def person(self):
+        return self.id
 
 
 class StudentDepartment(models.Model):
@@ -72,13 +94,17 @@ class GolfCart(models.Model):
 
 
 class Driver(models.Model):
-    id = models.ForeignKey(Person, db_column='id', on_delete=models.CASCADE, primary_key=True, unique=True)
+    id = models.OneToOneField(Person, db_column='id', on_delete=models.CASCADE, primary_key=True, verbose_name="Person")
     date_hired = models.DateField(default=None, db_column="dateHired")
     license_number = models.CharField(max_length=100, db_column="licenseNum", null=False, blank=False)
     golf_cart = models.ForeignKey(GolfCart, db_column="golfcart_id", on_delete=models.SET_NULL, null=True)
 
     class Meta:
         db_table = "Driver"
+
+    @property
+    def person(self):
+        return self.id
 
 
 class Location(models.Model):

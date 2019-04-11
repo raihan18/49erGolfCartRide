@@ -15,7 +15,11 @@ class StaffAdmin(admin.ModelAdmin):
 
 
 class ProfessorAdmin(admin.ModelAdmin):
-    list_display = ["title", "is_full_time"]
+
+    def full_name(self, object):
+        return object.person.full_name
+
+    list_display = ["full_name", "title", "is_full_time"]
 
 
 class StudentAdmin(admin.ModelAdmin):
