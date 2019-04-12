@@ -11,7 +11,10 @@ class PersonAdmin(admin.ModelAdmin):
 
 
 class StaffAdmin(admin.ModelAdmin):
-    list_display = ["position", "is_admin", "department"]
+    def full_name(self, object):
+        return object.person.full_name
+
+    list_display = ["full_name", "position", "is_admin", "department"]
 
 
 class ProfessorAdmin(admin.ModelAdmin):
@@ -23,19 +26,28 @@ class ProfessorAdmin(admin.ModelAdmin):
 
 
 class StudentAdmin(admin.ModelAdmin):
-    list_display = ["birth_date", "grad_year"]
+    def full_name(self, object):
+        return object.person.full_name
+
+    list_display = ["full_name", "birth_date", "grad_year"]
 
 
 class StudentDepartmentAdmin(admin.ModelAdmin):
-    list_display = ["student", "department"]
+    def identifier(self, object):
+        return object.student.person.full_name + " :: " + object.department.name
+
+    list_display = ["identifier", "student", "department"]
 
 
 class GolfCartAdmin(admin.ModelAdmin):
-    list_display = ["make", "model", "num_seats"]
+    list_display = ["make", "cart_model", "num_seats"]
 
 
 class DriverAdmin(admin.ModelAdmin):
-    list_display = ["date_hired", "license_number", "golf_cart"]
+    def full_name(self, object):
+        return object.person.full_name
+
+    list_display = ["full_name", "date_hired", "license_number", "golf_cart"]
 
 
 class LocationAdmin(admin.ModelAdmin):

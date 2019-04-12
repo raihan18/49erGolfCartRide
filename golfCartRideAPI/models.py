@@ -48,6 +48,9 @@ class Staff(models.Model):
     def person(self):
         return self.id
 
+    def __str__(self):
+        return self.person.full_name
+
 
 class Professor(models.Model):
     id = models.OneToOneField(Person, db_column='id', on_delete=models.CASCADE, primary_key=True, verbose_name="Person")
@@ -62,6 +65,9 @@ class Professor(models.Model):
     def person(self):
         return self.id
 
+    def __str__(self):
+        return self.person.full_name
+
 
 class Student(models.Model):
     id = models.OneToOneField(Person, db_column='id', on_delete=models.CASCADE, primary_key=True, verbose_name="Person")
@@ -75,6 +81,9 @@ class Student(models.Model):
     def person(self):
         return self.id
 
+    def __str__(self):
+        return self.person.full_name
+
 
 class StudentDepartment(models.Model):
     student = models.ForeignKey(Student, db_column="student_id", on_delete=models.CASCADE)
@@ -83,14 +92,24 @@ class StudentDepartment(models.Model):
     class Meta:
         db_table = "StudentDepartment"
 
+    def __str__(self):
+        return self.student.person.full_name + " :: " + self.department.name
+
 
 class GolfCart(models.Model):
     make = models.CharField(max_length=100, null=False, blank=False)
-    model = models.CharField(max_length=100, null=False, blank=False)
+    cart_model = models.CharField(max_length=100, null=False, blank=False, db_column='model')
     num_seats = models.IntegerField(db_column="numSeats", null=False, blank=False)
 
     class Meta:
         db_table = "GolfCart"
+
+    @property
+    def name(self):
+        return self.make + " " + self.cart_model
+
+    def __str__(self):
+        return self.name
 
 
 class Driver(models.Model):
@@ -106,6 +125,9 @@ class Driver(models.Model):
     def person(self):
         return self.id
 
+    def __str__(self):
+        return self.person.full_name
+
 
 class Location(models.Model):
     name = models.CharField(max_length=100, null=False, blank=False)
@@ -115,6 +137,9 @@ class Location(models.Model):
 
     class Meta:
         db_table = "Location"
+
+    def __str__(self):
+        return self.name
 
 
 class Ride(models.Model):
@@ -131,6 +156,9 @@ class Ride(models.Model):
 
     class Meta:
         db_table = "Ride"
+
+    def __str__(self):
+        return self.rider.full_name + ":: " + str(self.id)
 
 
 class RideRating(models.Model):
