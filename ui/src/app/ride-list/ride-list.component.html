@@ -1,0 +1,44 @@
+<div class="container-fluid">
+
+  <!-- Page Heading -->
+  <div class="d-sm-flex align-items-center justify-content-between mt-4 mb-4">
+    <h1 class="h3 mb-0 text-gray-800">My Rides</h1>
+  </div>
+
+  <!-- Data Table -->
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col" *ngFor="let col of columns">{{col.title}}</th>
+      </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let ride of (service.pageConfig$ | async).data">
+      <td *ngFor="let col of columns"><ngb-highlight [result]="ride[col.field]"></ngb-highlight></td>
+    </tr>
+    </tbody>
+  </table>
+  
+  <div *ngIf="(service.pageConfig$ | async).total > 0" 
+       class="d-flex justify-content-between p-2">
+    <div 
+      class="dataTables_info" id="dataTable_info" 
+      role="status" 
+      aria-live="polite">
+      Showing {{service.gridState.start}} to {{service.gridState.end}} 
+      of {{(service.pageConfig$ | async).total}} entries
+    </div>
+    <ngb-pagination
+      [collectionSize]="(service.pageConfig$ | async).total" 
+      [(page)]="service.page" [pageSize]="service.gridState.pageSize">
+    </ngb-pagination>
+  </div>
+
+</div>
+
+<div *ngIf="service.loading$ | async" class="loading">
+  <div class="spinner-border text-success" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+
