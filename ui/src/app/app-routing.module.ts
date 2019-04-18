@@ -1,11 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { LoginComponent } from './login/login.component';
+import { AuthGuard } from './_guards/auth.guard';
+import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '', component: LoginComponent, canActivate: [AuthGuard] },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
   {
     path: 'home',
-    loadChildren: './home/home.module#HomeModule',
+    loadChildren: './home/home.module#HomeModule',  // is this the best practice?
     pathMatch: 'full'
   },
   {
