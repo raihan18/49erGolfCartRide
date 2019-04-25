@@ -9,7 +9,14 @@ from rest_framework.authtoken.models import Token
 def create_user_token(request, **kwargs):
     username = request.POST.get('username')
     password = request.POST.get('password')
-    user = User.objects.get(username=username)
+    try:
+        user = User.objects.get(username=username)
+    except User.DoesNotExist:
+        return JsonResponse({
+            'message': 'INVALID CREDENTIALS',
+            'token': 'no-token-for-you'
+        })
+
     if user:
         is_password_valid = user.check_password(password)
         if is_password_valid:

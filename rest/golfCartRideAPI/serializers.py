@@ -75,15 +75,14 @@ class LocationSerializer(serializers.HyperlinkedModelSerializer):
 
 class RideSerializer(serializers.HyperlinkedModelSerializer):
     rider_name = serializers.CharField(source='rider.full_name')
-    driver_name = serializers.CharField(source='driver.person.full_name')
+    # driver_name = serializers.CharField(source='driver.person.full_name')
     start_location_address = serializers.CharField(source='start_location.address')
     end_location_address = serializers.CharField(source='end_location.address')
 
     class Meta:
         model = Ride
-        fields = ('id', 'driver_id', 'start_location_id', 'end_location_id', 'golf_cart_id', 'rider_id',
-                  'rider_name', 'driver_name',
-                  'start_time', 'end_time', 'is_completed', 'start_location_address', 'end_location_address')
+        fields = ('id', 'start_location_id', 'end_location_id', 'golf_cart_id', 'rider_id',
+                  'rider_name', 'start_time', 'end_time', 'status', 'start_location_address', 'end_location_address')
 
 
 class RideRatingSerializer(serializers.HyperlinkedModelSerializer):
