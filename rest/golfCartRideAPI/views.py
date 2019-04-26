@@ -1,6 +1,6 @@
-from django.shortcuts import render
-from rest_framework import viewsets
+from rest_framework import viewsets, generics
 from .serializers import *
+from .filters import RideFilter, RideRatingFilter
 
 
 class DepartmentViewSet(viewsets.ModelViewSet):
@@ -54,6 +54,18 @@ class RideViewSet(viewsets.ModelViewSet):
     serializer_class = RideSerializer
 
 
+class RideList(generics.ListAPIView):
+    queryset = Ride.objects.all()
+    serializer_class = RideSerializer
+    filter_class = RideFilter
+
+
 class RideRatingViewSet(viewsets.ModelViewSet):
     queryset = RideRating.objects.all()
     serializer_class = RideRatingSerializer
+
+
+class RideRatingList(generics.ListAPIView):
+    queryset = RideRating.objects.all()
+    serializer_class = RideRatingSerializer
+    filter_class = RideRatingFilter

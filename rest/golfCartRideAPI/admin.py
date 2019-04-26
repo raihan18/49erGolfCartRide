@@ -55,8 +55,8 @@ class LocationAdmin(admin.ModelAdmin):
 
 
 class RideAdmin(admin.ModelAdmin):
-    list_display = ["start_time", "end_time", "is_completed", "start_location", "end_location",
-                    "driver", "rider", "golf_cart"]
+    list_display = ["start_time", "end_time", "status", "start_location", "end_location",
+                    "rider", "golf_cart"]
 
 
 class RideRatingAdmin(admin.ModelAdmin):

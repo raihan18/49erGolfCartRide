@@ -143,14 +143,20 @@ class Location(models.Model):
 
 
 class Ride(models.Model):
+    STATUS_TYPES = (
+        ('pending', 'Pending'),
+        ('cancelled', 'Cancelled'),
+        ('complete', 'Complete')
+    )
+
     start_time = models.DateTimeField(null=False, blank=False, db_column="startTime")
     end_time = models.DateTimeField(null=False, blank=False, db_column="endTime")
-    is_completed = models.BooleanField(default=False, db_column="isCompleted")
+    status = models.CharField(max_length=100, db_column="status", default='pending')
     start_location = models.ForeignKey(Location, db_column="start_location_id", on_delete=models.DO_NOTHING,
                                        related_name="start_location_set")
     end_location = models.ForeignKey(Location, db_column="end_location_id", on_delete=models.DO_NOTHING,
                                      related_name="end_location_set")
-    driver = models.ForeignKey(Driver, db_column="driver_id", on_delete=models.DO_NOTHING)
+    # driver = models.ForeignKey(Driver, db_column="driver_id", on_delete=models.DO_NOTHING)
     rider = models.ForeignKey(Person, db_column="rider_id", on_delete=models.DO_NOTHING)
     golf_cart = models.ForeignKey(GolfCart, db_column="golfcart_id", on_delete=models.DO_NOTHING)
 

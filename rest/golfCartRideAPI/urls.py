@@ -16,5 +16,7 @@ router.register(r'ride-ratings', RideRatingViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('list/rides/', RideList.as_view()),
+    path('list/ride-ratings/', RideRatingList.as_view()),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]

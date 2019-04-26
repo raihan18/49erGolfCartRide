@@ -15,8 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from .token import *
 
 urlpatterns = [
     path('api/', include('golfCartRideAPI.urls')),
+    path('token/', create_user_token, name='create_token'),
     path('admin/', admin.site.urls),
 ]
