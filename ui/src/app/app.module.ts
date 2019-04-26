@@ -12,6 +12,7 @@ import { ErrorInterceptor } from './http-helpers/error.interceptor';
 import { JwtInterceptor } from './http-helpers/jwt.interceptor';
 import { AlertComponent } from './custom components/alert.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+    MatButtonModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},

@@ -1,12 +1,19 @@
 <nav class="navbar navbar-light bg-light">
-  <a class="navbar-brand" routerLink="/home">
-    <img 
-      src="assets/uncc-logo.png" 
-      width="50" 
-      height="50" 
-      class="d-inline-block align-top" alt="uncc-logo">
-  </a>
-  <form class="form-inline">
-    <button class="btn btn-outline-success my-2 my-sm-0">Logout</button>
-  </form>
+  <div class="nav-bar-custom"> 
+    <div>
+        <img src="assets/uncc-logo.png" width="75" height="75" class="d-inline-block align-top" alt="uncc-logo">
+    </div>
+    <div routerLink="/home" class="nav-headers">
+      Home
+    </div>
+    <div routerLink="/home" class="nav-headers">
+      Reserve Ride  
+    </div>
+    <div routerLink="/home" class="nav-headers">
+      Previous Rides 
+    </div>
+
+  </div>
+
+  <button mat-stroked-button color="accent"  routerLink="/login">Logout</button>
 </nav>
