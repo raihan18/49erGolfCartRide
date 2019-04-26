@@ -1,0 +1,24 @@
+<div class="login-box">
+    <div class="inner-box"> 
+        <div class="title">
+            <div>
+                <img src="assets/uncc-logo.png" width="75" height="75" class="d-inline-block align-top" alt="uncc-logo">
+            </div>
+            <div class="title-header"> 
+                Golf Cart Service
+            </div>
+        </div>
+        <div style="display: flex; flex-direction: column;">
+            <mat-form-field>
+                <input matInput placeholder="Username">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Password">
+            </mat-form-field>
+            <div style="margin-top: 1.375em;">
+                <button mat-stroked-button color="accent" [disabled]="loading" routerLink="/home">Login</button>
+                <button mat-flat-button routerLink="/register" style="margin-left: 1.5em">Register</button>
+            </div>
+        </div>
+    </div>
+</div>

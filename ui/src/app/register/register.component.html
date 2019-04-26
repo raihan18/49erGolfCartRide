@@ -1,0 +1,47 @@
+<div class="register-box">
+    <div class="inner-box"> 
+        <div style="display: block">
+            <div class="title">
+                <div>
+                    <img src="assets/uncc-logo.png" width="75" height="75" class="d-inline-block align-top" alt="uncc-logo">
+                </div>
+                <div class="title-header"> 
+                    Golf Cart Service
+                </div>
+            </div>
+            <div>
+              <h4>Registration Form:</h4>
+            </div>
+        </div>
+
+        <div class="registration-form">
+          <!-- <div style="display: flex; flex-direction: row">
+            <mat-form-field>
+              <input matInput placeholder="First Name">
+            </mat-form-field>
+            <div style="width: 2em">
+            </div>
+            <mat-form-field>
+              <input matInput placeholder="Last Name">
+            </mat-form-field>
+          </div> -->
+          <mat-form-field>
+            <input matInput placeholder="First Name">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Last Name">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Enter your email">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'">
+            <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </mat-form-field>
+        </div>
+        <div style="padding-top: 1em;">
+            <button mat-stroked-button color="accent" [disabled]="loading" routerLink="/login">Register</button>
+            <button mat-flat-button routerLink="/login" style="margin-left: 1.5em">Cancel</button>
+        </div>
+    </div>
+</div>
