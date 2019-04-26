@@ -17,6 +17,9 @@ import { ViewComponentComponent } from './view-component/view-component.componen
 import { HomeComponent } from './home/home.component';
 import { RideListComponent } from './ride-list/ride-list.component';
 import { DriverChartComponent } from './driver-chart/driver-chart.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatIconModule, MatInputModule} from '@angular/material';
+
 
 @NgModule({
   declarations: [
@@ -35,6 +38,9 @@ import { DriverChartComponent } from './driver-chart/driver-chart.component';
     HttpClientModule,
     ReactiveFormsModule,
     MatButtonModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
