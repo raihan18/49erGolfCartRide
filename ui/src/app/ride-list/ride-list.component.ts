@@ -1,15 +1,17 @@
 import { Component,
          OnInit,
          ChangeDetectionStrategy } from '@angular/core';
-import { ColumnConfig } from './ride-list.model';
+import { ColumnConfig, Ride } from './ride-list.model';
 import { RideListService } from './ride-list.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 export const COLUMNS: ColumnConfig[] = [
   {field: 'id', title: 'Id'},
   {field: 'startTime', title: 'Start Time'},
   {field: 'startLoc', title: 'Pick up Location'},
   {field: 'endLoc', title: 'Drop Off Location'},
-  {field: 'status', title: 'Status'}
+  {field: 'status', title: 'Status'},
+  {field: 'rating', title: 'Rating'}
 ];
 
 @Component({
@@ -21,7 +23,10 @@ export const COLUMNS: ColumnConfig[] = [
 })
 export class RideListComponent implements OnInit {
 
-  constructor(public service: RideListService) {}
+  currentRate = 5;
+
+  constructor(public service: RideListService,
+              private modalService: NgbModal) {}
 
   ngOnInit() {
     this.service.getRideList();
@@ -29,6 +34,17 @@ export class RideListComponent implements OnInit {
 
   get columns() {
     return COLUMNS;
+  }
+
+  canRate(data: Ride) {
+    return data.status === 'completed' && data.rating === undefined;
+  }
+
+  open(content, data: Ride) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+
+    }, (reason) => {
+    });
   }
 
 }
