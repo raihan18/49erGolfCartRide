@@ -10,14 +10,14 @@
         </div>
         <div style="display: flex; flex-direction: column;">
             <mat-form-field>
-                <input matInput placeholder="Username">
+                <input matInput placeholder="Email">
             </mat-form-field>
             <mat-form-field>
                 <input matInput placeholder="Password">
             </mat-form-field>
-            <div style="margin-top: 1.375em;">
-                <button mat-stroked-button color="accent" [disabled]="loading" routerLink="/home">Login</button>
-                <button mat-flat-button routerLink="/register" style="margin-left: 1.5em">Register</button>
+            <div>
+                <button class="btn btn-outline-success col-sx-12 col-sm-5" [disabled]="loading" routerLink="/home">Login</button>
+                <button class="btn btn-outline-success col-sx-12 col-sm-5 ml-sm-2" routerLink="/register">Register</button>
             </div>
         </div>
     </div>

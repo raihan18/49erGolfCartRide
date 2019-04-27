@@ -14,7 +14,23 @@
     </thead>
     <tbody>
     <tr *ngFor="let ride of (service.pageConfig$ | async).data">
-      <td *ngFor="let col of columns"><ngb-highlight [result]="ride[col.field]"></ngb-highlight></td>
+      <ng-container *ngFor="let col of columns">
+        <ng-container *ngIf="col.field === 'rating'; else baseTmpl">
+          <td>
+            <ng-container *ngIf="canRate(ride); else baseRateTmpl">
+              <button (click)="open(content, ride)" type="button" class="btn btn-success btn-sm">
+                Let's Rate!
+              </button>
+            </ng-container>
+            <ng-template #baseRateTmpl>
+              <td>{{ride[col.field]}} <ng-container *ngIf="ride['status'] === 'completed'">/ 5</ng-container></td>
+            </ng-template>
+          </td>
+        </ng-container>
+        <ng-template #baseTmpl>
+          <td><ngb-highlight [result]="ride[col.field]"></ngb-highlight></td>
+        </ng-template>
+      </ng-container>
     </tr>
     </tbody>
   </table>
@@ -42,3 +58,23 @@
   </div>
 </div>
 
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Rate this ride</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body d-flex justify-content-center">
+    <ngb-rating [(rate)]="currentRate" [starTemplate]="t" max="5"></ngb-rating>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-success" (click)="modal.close('Save click')">Save</button>
+  </div>
+</ng-template>
+  
+<ng-template #t let-fill="fill">
+  <span class="star" [class.full]="fill === 100">
+    <span class="half" [style.width.%]="fill">&#9733;</span>&#9733;
+  </span>
+</ng-template>

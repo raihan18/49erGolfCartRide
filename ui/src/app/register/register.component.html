@@ -39,9 +39,9 @@
             <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
           </mat-form-field>
         </div>
-        <div style="padding-top: 1em;">
-            <button mat-stroked-button color="accent" [disabled]="loading" routerLink="/login">Register</button>
-            <button mat-flat-button routerLink="/login" style="margin-left: 1.5em">Cancel</button>
+        <div>
+          <button class="btn btn-outline-success col-sx-12 col-sm-5" [disabled]="loading" routerLink="/login">Register</button>
+          <button class="btn btn-outline-success col-sx-12 col-sm-5 ml-sm-2" routerLink="/login">Cancel</button>
         </div>
     </div>
 </div>
