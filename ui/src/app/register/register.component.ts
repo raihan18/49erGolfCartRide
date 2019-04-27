@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -9,6 +8,7 @@ import { FormControl } from '@angular/forms';
 export class RegisterComponent implements OnInit {
 
   hide = true;
+  loading = false;
   constructor() { }
 
   ngOnInit() {

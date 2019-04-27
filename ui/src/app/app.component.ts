@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthenticationService } from './services/authentication.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'ui';
+
+  constructor(private authenticationService: AuthenticationService) {
+  }
+
+
+  get isLoggedIn(): boolean {
+    return this.authenticationService.currentUserValue !== null;
+  }
 }
