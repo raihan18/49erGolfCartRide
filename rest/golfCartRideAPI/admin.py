@@ -7,7 +7,7 @@ class DepartmentAdmin(admin.ModelAdmin):
 
 
 class PersonAdmin(admin.ModelAdmin):
-    list_display = ["first_name", "last_name", "email", "phone", "sub_type"]
+    list_display = ["first_name", "last_name", "email", "phone", 'user']
 
 
 class StaffAdmin(admin.ModelAdmin):

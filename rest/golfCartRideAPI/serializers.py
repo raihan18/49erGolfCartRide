@@ -11,7 +11,7 @@ class DepartmentSerializer(serializers.HyperlinkedModelSerializer):
 class PersonSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Person
-        fields = ('id', 'first_name', 'last_name', 'email', 'phone', 'sub_type')
+        fields = ('id', 'first_name', 'last_name', 'email', 'phone')
         
 
 class StaffSerializer(serializers.HyperlinkedModelSerializer):

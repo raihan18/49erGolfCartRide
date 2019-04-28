@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class Department(models.Model):
@@ -18,11 +19,12 @@ class Person(models.Model):
         ('student', 'Student'),
         ('driver', 'Driver')
     )
+    user = models.OneToOneField(User, db_column='user_id', null=True, blank=True, on_delete=models.SET_NULL)
     first_name = models.CharField(max_length=100, null=False, blank=False, db_column="fname")
     last_name = models.CharField(max_length=100, null=False, blank=False, db_column="lname")
     email = models.CharField(max_length=100, null=False, blank=False)
     phone = models.CharField(max_length=100, null=True, blank=True)
-    sub_type = models.CharField(max_length=20, db_column="subtype", null=False, blank=False, choices=PERSON_TYPES)
+    # sub_type = models.CharField(max_length=20, db_column="subtype", null=False, blank=False, choices=PERSON_TYPES)
 
     @property
     def full_name(self):
@@ -150,7 +152,7 @@ class Ride(models.Model):
     )
 
     start_time = models.DateTimeField(null=False, blank=False, db_column="startTime")
-    end_time = models.DateTimeField(null=False, blank=False, db_column="endTime")
+    end_time = models.DateTimeField(null=True, blank=True, db_column="endTime")
     status = models.CharField(max_length=100, db_column="status", default='pending')
     start_location = models.ForeignKey(Location, db_column="start_location_id", on_delete=models.DO_NOTHING,
                                        related_name="start_location_set")
