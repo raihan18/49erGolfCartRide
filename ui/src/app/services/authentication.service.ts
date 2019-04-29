@@ -8,7 +8,7 @@ import { User } from '../models/user';
 export class AuthenticationService {
     private currentUserSubject: BehaviorSubject<User>;
     public currentUser: Observable<User>;
-    private apiURL = 'http://localhost:8080';
+    private apiURL = 'http://localhost:8000';
 
     constructor(private http: HttpClient) {
         this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
@@ -20,7 +20,7 @@ export class AuthenticationService {
     }
 
     login(username: string, password: string) {
-        return this.http.post<any>(`${this.apiURL}/login`, { username, password })
+        return this.http.post<any>(`${this.apiURL}/token?username=${username}&password=${password}`, {})
             .pipe(map(user => {
                 // login successful if there's a jwt token in the response
                 if (user && user.token) {
