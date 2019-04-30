@@ -170,7 +170,7 @@ class Ride(models.Model):
 
 
 class RideRating(models.Model):
-    complete_date = models.DateField(null=False, blank=False, db_column="completeDate")
+    complete_date = models.DateField(null=True, blank=True, db_column="completeDate")
     rating = models.IntegerField(null=False, blank=False)
     ride = models.ForeignKey(Ride, db_column="ride_id", on_delete=models.DO_NOTHING)
 
