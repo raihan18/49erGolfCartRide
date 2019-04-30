@@ -89,7 +89,7 @@ class RideRatingList(generics.ListAPIView):
 
 def get_top_three_driver(request, **kwargs):
     cursor = connection.cursor()
-    query = "SELECT qr.driver_id,qr.driver_first_name,qr.driver_last_name,qr.avrating FROM (SELECT Driver.id AS driver_id,Person.fname AS driver_first_name,Person.lname AS driver_last_name,Avg(Rating.rating) AS avrating FROM riderating AS Rating LEFT JOIN ride AS Ride ON Ride.id=Rating.ride_id LEFT JOIN driver AS Driver ON Driver.golfcart_id=Ride.golfcart_id LEFT JOIN Person AS Person ON Person.id=Driver.id GROUP BY Driver.id) AS qr ORDER BY avrating DESC LIMIT 3;"
+    query = "SELECT * FROM top_3_drivers;"
     cursor.execute(query)
     rows = cursor.fetchall()
     response_data = []
@@ -105,7 +105,7 @@ def get_top_three_driver(request, **kwargs):
     
 def get_rides(request, **kwargs):
     cursor = connection.cursor()
-    query = "SELECT Ride.id,Ride.startTime,Ride.endTime,Location1.name as start_loc,Location2.name as end_loc,Ride.status,Rating.rating FROM ride as Ride LEFT JOIN driver as Driver ON Driver.golfcart_id=Ride.golfcart_id LEFT JOIN person as Person ON Person.id=Driver.id LEFT JOIN riderating as Rating ON Rating.id=Ride.id LEFT JOIN location as Location1 ON Location1.id=Ride.start_location_id LEFT JOIN location as Location2 ON Location2.id=Ride.end_location_id;"
+    query = "SELECT * FROM ride_list;"
     cursor.execute(query)
     rows = cursor.fetchall()
     response_data = []
