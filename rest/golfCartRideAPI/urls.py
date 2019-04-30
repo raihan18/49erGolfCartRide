@@ -18,6 +18,7 @@ urlpatterns = [
     path('', include(router.urls)),
     # path('list/rides/', RideList.as_view()),
     path('add/ride-ratings/', add_ride_ratings),
+    path('add/person/', add_user),
     path('list/ride-ratings/', RideRatingList.as_view()),
     path('list/top_three_drivers/', get_top_three_driver),
     path('list/rides/', get_rides),

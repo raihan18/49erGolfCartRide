@@ -140,3 +140,21 @@ def get_rides(request, **kwargs):
         })
 
     return JsonResponse(response_data, safe=False)
+    
+def add_user(request, **kwargs):
+    data = json.loads(request.body)
+    fName = data.get('first_name')
+    lName = data.get('last_name')
+    email = data.get('email')
+    phone = data.get('phone')
+    password = data.get('password')
+    username = data.get('username')
+    
+    user = User.objects.create(username=username, password=password)
+    
+    cursor = connection.cursor()
+    query = "CALL insert_person(\" " + fName + " \", \" " + lName + "\",\" " + email + "\", \" " + phone  + "\"," + str(user.id) + ");"
+    cursor.execute(query)
+    
+    response_data = data
+    return JsonResponse(response_data, safe=False)
