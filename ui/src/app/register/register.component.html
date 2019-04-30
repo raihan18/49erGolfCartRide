@@ -26,16 +26,16 @@
             </mat-form-field>
           </div> -->
           <mat-form-field>
-            <input matInput placeholder="First Name" [(ngModel)]="user.firstName">
+            <input matInput placeholder="First Name" [(ngModel)]="user.first_name">
           </mat-form-field>
           <mat-form-field>
-            <input matInput placeholder="Last Name" [(ngModel)]="user.lastName">
+            <input matInput placeholder="Last Name" [(ngModel)]="user.last_name">
           </mat-form-field>
           <mat-form-field>
             <input matInput placeholder="Enter your phone number" [(ngModel)]="user.phone">
           </mat-form-field>          
           <mat-form-field>
-            <input matInput placeholder="Enter your uncc email" [(ngModel)]="user.username">
+            <input matInput placeholder="Enter your uncc email" [(ngModel)]="user.email">
           </mat-form-field>
           <mat-form-field>
             <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'" [(ngModel)]="user.password">

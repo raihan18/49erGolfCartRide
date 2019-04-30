@@ -38,12 +38,13 @@ export class RideListComponent implements OnInit {
   }
 
   canRate(data: Ride) {
-    return data.status === 'complete' && data.rating === 0;
+    return data.status === 'complete' && data.rating === null;
   }
 
   open(content, data: Ride) {
+    this.currentRate = 5;
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-
+      this.service.rateRide(data.id, this.currentRate);
     }, (reason) => {
     });
   }
