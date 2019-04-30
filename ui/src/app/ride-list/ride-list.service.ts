@@ -6,6 +6,7 @@ import { debounceTime,
          switchMap,
          tap } from 'rxjs/operators';
 import { RIDES } from './rides';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class RideListService {
@@ -22,8 +23,9 @@ export class RideListService {
     start: 0,
     end: 0
   };
+  private apiURL = 'http://localhost:8000';
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   getRideList() {
     this._search$.pipe(

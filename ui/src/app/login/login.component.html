@@ -16,7 +16,7 @@
                 <input matInput placeholder="Password">
             </mat-form-field>
             <div>
-                <button class="btn btn-outline-success col-sx-12 col-sm-5" [disabled]="loading" routerLink="/home">Login</button>
+                <button class="btn btn-outline-success col-sx-12 col-sm-5" [disabled]="loading" (click)="login()">Login</button>
                 <button class="btn btn-outline-success col-sx-12 col-sm-5 ml-sm-2" routerLink="/register">Register</button>
             </div>
         </div>
