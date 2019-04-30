@@ -1,6 +1,8 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
-import { DRIVER_RANK } from './driver-rank';
+import { DriverChartService } from './driver-chart.service';
+import { DriverRank } from './driver-chart.model';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-driver-chart',
@@ -16,13 +18,12 @@ import { DRIVER_RANK } from './driver-rank';
 })
 export class DriverChartComponent implements OnInit {
 
-  constructor() { }
+  constructor(public service: DriverChartService) { }
+
+  drivers: Observable<DriverRank[]>;
 
   ngOnInit() {
-  }
-
-  get drivers() {
-    return DRIVER_RANK;
+    this.drivers = this.service.getDriverRank();
   }
 
 }
