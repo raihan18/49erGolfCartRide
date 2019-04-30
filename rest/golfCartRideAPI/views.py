@@ -80,6 +80,12 @@ class RideRatingViewSet(viewsets.ModelViewSet):
     queryset = RideRating.objects.all()
     serializer_class = RideRatingSerializer
 
+    def create(self, request, *args, **kwargs):
+        data = request.data
+        rating = RideRating.objects.create(ride=data['ride'], rating=data['rating'], complete_date=datetime.datetime.today().strftime("%m/%d/%Y") )
+        rating.save()
+        response = super(RideRatingViewSet, self).create(request, *args, **kwargs)
+        return response
 
 class RideRatingList(generics.ListAPIView):
     queryset = RideRating.objects.all()

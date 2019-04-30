@@ -20,4 +20,5 @@ urlpatterns = [
     path('list/ride-ratings/', RideRatingList.as_view()),
     path('list/top_three_drivers/', get_top_three_driver),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+    path('rate/ride/', RideRatingViewSet.as_view()),
 ]
