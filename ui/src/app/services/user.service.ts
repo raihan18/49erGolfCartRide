@@ -16,7 +16,7 @@ export class UserService {
     }
 
     register(user: User) {
-        return this.http.post<any>(`${this.apiURL}/register`, user);
+        return this.http.post<any>(`${this.apiURL}/api/register/`, user);
     }
 
     update(user: User) {

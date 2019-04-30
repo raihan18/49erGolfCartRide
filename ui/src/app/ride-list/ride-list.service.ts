@@ -55,6 +55,13 @@ export class RideListService {
     });
   }
 
+  rateRide(ride_id, rating) {
+    this.http.post<Ride>('http://localhost:8000/api/add/ride-ratings/', {ride_id, rating})
+      .subscribe(list => {
+        this.page = this._gridState.page;
+      });
+  }
+
   get pageConfig$() {
     return this._pageConfig$.asObservable();
   }

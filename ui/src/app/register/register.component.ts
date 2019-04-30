@@ -24,14 +24,10 @@ export class RegisterComponent implements OnInit {
       this.user.lastName && this.user.lastName.length > 0 &&
       this.user.phone && this.user.phone.length > 0 &&
       this.user.password && this.user.password.length > 0 &&
-      this.user.username && this.user.username.length > 0) {
+      this.user.email && this.user.email.length > 0) {
 
       this.userService.register(this.user).subscribe(user => {
-        if (user && user.token) {
-            // store user details and jwt token in local storage to keep user logged in between page refreshes
-            sessionStorage.setItem('currentUser', JSON.stringify(user));
-            this.authService.login(this.user.username, this.user.password);
-        }
+        const s = null;
     });
     } else {
       alert ('Please Enter All the fields appropriately');

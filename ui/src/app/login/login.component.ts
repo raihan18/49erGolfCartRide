@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   loading = false;
   submitted = false;
-  username = '';
+  email = '';
   password = '';
 
   constructor(private router: Router,
