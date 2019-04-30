@@ -102,3 +102,22 @@ def get_top_three_driver(request, **kwargs):
         })
 
     return JsonResponse(response_data, safe=False)
+    
+def get_rides(request, **kwargs):
+    cursor = connection.cursor()
+    query = "SELECT Ride.id,Ride.startTime,Ride.endTime,Location1.name as start_loc,Location2.name as end_loc,Ride.status,Rating.rating FROM ride as Ride LEFT JOIN driver as Driver ON Driver.golfcart_id=Ride.golfcart_id LEFT JOIN person as Person ON Person.id=Driver.id LEFT JOIN riderating as Rating ON Rating.id=Ride.id LEFT JOIN location as Location1 ON Location1.id=Ride.start_location_id LEFT JOIN location as Location2 ON Location2.id=Ride.end_location_id;"
+    cursor.execute(query)
+    rows = cursor.fetchall()
+    response_data = []
+    for row in rows:
+        response_data.append({
+            'id': row[0],
+            'startTime': row[1],
+            'endTime': row[2],
+            'startLoc': row[3],
+            'endLoc': row[4],
+            'status': row[5],
+            'rating': row[6]
+        })
+
+    return JsonResponse(response_data, safe=False)

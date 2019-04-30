@@ -8,6 +8,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export const COLUMNS: ColumnConfig[] = [
   {field: 'id', title: 'Id'},
   {field: 'startTime', title: 'Start Time'},
+  {field: 'endTime', title: 'End Time'},
   {field: 'startLoc', title: 'Pick up Location'},
   {field: 'endLoc', title: 'Drop Off Location'},
   {field: 'status', title: 'Status'},
@@ -37,7 +38,7 @@ export class RideListComponent implements OnInit {
   }
 
   canRate(data: Ride) {
-    return data.status === 'completed' && data.rating === undefined;
+    return data.status === 'completed' && data.rating === 0;
   }
 
   open(content, data: Ride) {

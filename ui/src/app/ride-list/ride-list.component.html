@@ -15,21 +15,7 @@
     <tbody>
     <tr *ngFor="let ride of (service.pageConfig$ | async).data">
       <ng-container *ngFor="let col of columns">
-        <ng-container *ngIf="col.field === 'rating'; else baseTmpl">
-          <td>
-            <ng-container *ngIf="canRate(ride); else baseRateTmpl">
-              <button (click)="open(content, ride)" type="button" class="btn btn-success btn-sm">
-                Let's Rate!
-              </button>
-            </ng-container>
-            <ng-template #baseRateTmpl>
-              <td>{{ride[col.field]}} <ng-container *ngIf="ride['status'] === 'completed'">/ 5</ng-container></td>
-            </ng-template>
-          </td>
-        </ng-container>
-        <ng-template #baseTmpl>
-          <td><ngb-highlight [result]="ride[col.field]"></ngb-highlight></td>
-        </ng-template>
+        <td><ngb-highlight [result]="ride[col.field]"></ngb-highlight></td>
       </ng-container>
     </tr>
     </tbody>
