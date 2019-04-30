@@ -1,3 +1,4 @@
+import json
 from django.db import connection
 from django.http import JsonResponse
 from django.contrib.auth.models import User
@@ -89,8 +90,9 @@ class RideRatingList(generics.ListAPIView):
 
 def add_ride_ratings(request, **kwargs):
     if request.method == 'POST':
-        rating = request.POST.get('rating')
-        ride_id = request.POST.get('ride_id')
+        data = json.loads(request.body)
+        rating = int(data.get('rating'))
+        ride_id = data.get('ride_id')
 
         # data = request.data
         ride_rating = RideRating.objects.create(rating=rating, ride_id=ride_id)
