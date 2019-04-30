@@ -26,21 +26,24 @@
             </mat-form-field>
           </div> -->
           <mat-form-field>
-            <input matInput placeholder="First Name">
+            <input matInput placeholder="First Name" [(ngModel)]="user.firstName">
           </mat-form-field>
           <mat-form-field>
-            <input matInput placeholder="Last Name">
+            <input matInput placeholder="Last Name" [(ngModel)]="user.lastName">
           </mat-form-field>
           <mat-form-field>
-            <input matInput placeholder="Enter your email">
+            <input matInput placeholder="Enter your phone number" [(ngModel)]="user.phone">
+          </mat-form-field>          
+          <mat-form-field>
+            <input matInput placeholder="Enter your uncc email" [(ngModel)]="user.username">
           </mat-form-field>
           <mat-form-field>
-            <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'">
+            <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'" [(ngModel)]="user.password">
             <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
           </mat-form-field>
         </div>
         <div>
-          <button class="btn btn-outline-success col-sx-12 col-sm-5" [disabled]="loading" routerLink="/login">Register</button>
+          <button class="btn btn-outline-success col-sx-12 col-sm-5" [disabled]="loading" (click)="register()">Register</button>
           <button class="btn btn-outline-success col-sx-12 col-sm-5 ml-sm-2" routerLink="/login">Cancel</button>
         </div>
     </div>
