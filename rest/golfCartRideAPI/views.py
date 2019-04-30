@@ -89,8 +89,11 @@ class RideRatingList(generics.ListAPIView):
 
 def add_ride_ratings(request, **kwargs):
     if request.method == 'POST':
-        data = request.data
-        ride_rating = RideRating.objects.create(**data)
+        rating = request.POST.get('rating')
+        ride_id = request.POST.get('ride_id')
+
+        # data = request.data
+        ride_rating = RideRating.objects.create(rating=rating, ride_id=ride_id)
         ride_rating.save()
         return JsonResponse({
             'id': ride_rating.id,
