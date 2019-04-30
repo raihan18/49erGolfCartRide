@@ -38,7 +38,7 @@ export class RideListComponent implements OnInit {
   }
 
   canRate(data: Ride) {
-    return data.status === 'completed' && data.rating === 0;
+    return data.status === 'complete' && data.rating === 0;
   }
 
   open(content, data: Ride) {
