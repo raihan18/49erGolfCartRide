@@ -87,6 +87,19 @@ class RideRatingList(generics.ListAPIView):
     filter_class = RideRatingFilter
 
 
+def add_ride_ratings(request, **kwargs):
+    if request.method == 'POST':
+        data = request.data
+        ride_rating = RideRating.objects.create(**data)
+        ride_rating.save()
+        return JsonResponse({
+            'id': ride_rating.id,
+            'ride_id': ride_rating.ride_id,
+            'rating': ride_rating.rating
+        })
+    return JsonResponse({'message': "Bad request!"})
+
+
 def get_top_three_driver(request, **kwargs):
     cursor = connection.cursor()
     query = "SELECT * FROM top_3_drivers;"
@@ -102,7 +115,8 @@ def get_top_three_driver(request, **kwargs):
         })
 
     return JsonResponse(response_data, safe=False)
-    
+
+
 def get_rides(request, **kwargs):
     cursor = connection.cursor()
     query = "SELECT * FROM ride_list;"
