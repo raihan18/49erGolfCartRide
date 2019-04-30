@@ -3,8 +3,9 @@ export interface Ride {
   startTime: string;
   startLoc: string;
   endLoc: string;
+  endTime: string;
   status: string;
-  rating?: number;
+  rating: number;
 }
 
 export interface ColumnConfig {

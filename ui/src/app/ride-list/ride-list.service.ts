@@ -1,12 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Ride, PageConfig, GridState } from './ride-list.model';
 import { BehaviorSubject, Subject, Observable, of } from 'rxjs';
-import { debounceTime,
-         delay,
-         switchMap,
-         tap } from 'rxjs/operators';
-import { RIDES } from './rides';
 import { HttpClient } from '@angular/common/http';
+import { tap, debounceTime, switchMap, delay } from 'rxjs/operators';
 
 @Injectable()
 export class RideListService {
@@ -23,11 +19,31 @@ export class RideListService {
     start: 0,
     end: 0
   };
-  private apiURL = 'http://localhost:8000';
+  private rides: Ride[] = [];
 
   constructor(private http: HttpClient) { }
 
+  // getRideList() {
+  //   this._search$.pipe(
+  //     tap(() => this._loading$.next(true)),
+  //     debounceTime(200),
+  //     switchMap(() => this._search()),
+  //     delay(200),
+  //     tap(() => this._loading$.next(false))
+  //   ).subscribe(result => {
+  //     this._pageConfig$.next(result);
+  //   });
+
+  //   this._search$.next();
+  // }
+
   getRideList() {
+    this.http.get<Ride[]>('http://localhost:8000/api/list/rides/')
+      .subscribe(list => {
+        this.rides = list;
+        this._search$.next();
+      });
+
     this._search$.pipe(
       tap(() => this._loading$.next(true)),
       debounceTime(200),
@@ -37,8 +53,6 @@ export class RideListService {
     ).subscribe(result => {
       this._pageConfig$.next(result);
     });
-
-    this._search$.next();
   }
 
   get pageConfig$() {
@@ -65,8 +79,8 @@ export class RideListService {
     const {pageSize, page} = this._gridState;
 
     // pagination
-    const data = RIDES.slice((page - 1) * pageSize, (page - 1) * pageSize + pageSize);
-    const total = RIDES.length;
+    const data = this.rides.slice((page - 1) * pageSize, (page - 1) * pageSize + pageSize);
+    const total = this.rides.length;
     this._gridState.start = (page === 1) ? 1 : (page - 1) * pageSize;
     this._gridState.end = (page * pageSize > total) ? total : page * pageSize;
     return of({data, total});
