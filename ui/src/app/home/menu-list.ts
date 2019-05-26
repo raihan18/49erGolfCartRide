@@ -6,12 +6,12 @@ export interface Menu {
 
 export const menuList: Menu[] = [
   {
-    title: 'My Rides',
+    title: 'Manage Tickets',
     icon: 'event',
     link: '/ride-list'
   },
   {
-    title: 'Top Drivers',
+    title: 'Manage Users',
     icon: 'grade',
     link: '/driver-chart'
   }
